@@ -12,8 +12,8 @@ RUN set -x && \
   apt-get purge -y --auto-remove $BUILD_PACKAGES && \
   rm -rf /var/lib/apt/lists/* && \
   # Add some basic aliases
-  echo 'alias .."cd .."' >> ~/.bashrc && \
-  echo 'alias l="ls -CF --group-directories-first"' >> ~/.bashrc && \
+  echo 'alias ..="cd .."' >> ~/.bashrc && \
+  echo 'alias l="ls -CF --group-directories-first --color=auto"' >> ~/.bashrc && \
   echo 'alias ll="ls -lFh --group-directories-first"' >> ~/.bashrc && \
   echo 'alias lla="ls -laFh --group-directories-first"' >> ~/.bashrc
 
