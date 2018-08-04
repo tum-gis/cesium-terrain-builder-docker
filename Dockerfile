@@ -7,3 +7,5 @@ RUN set -x && \
   cd cesium-terrain-builder && \
   git checkout master-quantized-mesh && \
   mkdir build && cd build && cmake .. && make install . && ldconfig
+
+CMD ["bash"]
