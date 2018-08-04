@@ -10,6 +10,11 @@ RUN set -x && \
   git checkout master-quantized-mesh && \
   mkdir build && cd build && cmake .. && make install . && ldconfig && \
   apt-get purge -y --auto-remove $BUILD_PACKAGES && \
-  rm -rf /var/lib/apt/lists/*
+  rm -rf /var/lib/apt/lists/* && \
+  # Add some basic aliases
+  echo 'alias .."cd .."' >> ~/.bashrc && \
+  echo 'alias l="ls -CF --group-directories-first"' >> ~/.bashrc && \
+  echo 'alias ll="ls -lFh --group-directories-first"' >> ~/.bashrc && \
+  echo 'alias lla="ls -laFh --group-directories-first"' >> ~/.bashrc
 
 CMD ["bash"]
