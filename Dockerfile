@@ -14,7 +14,7 @@ RUN set -x && \
   # Add some basic aliases
   echo 'alias ..="cd .."' >> ~/.bashrc && \
   echo 'alias l="ls -CF --group-directories-first --color=auto"' >> ~/.bashrc && \
-  echo 'alias ll="ls -lFh --group-directories-first"' >> ~/.bashrc && \
-  echo 'alias lla="ls -laFh --group-directories-first"' >> ~/.bashrc
+  echo 'alias ll="ls -lFh --group-directories-first --color=auto"' >> ~/.bashrc && \
+  echo 'alias lla="ls -laFh --group-directories-first  --color=auto"' >> ~/.bashrc
 
 CMD ["bash"]

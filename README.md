@@ -37,14 +37,10 @@ docker run -it --name ctb \
 ##### Windows (git-bash)
 ```bash
 winpty docker run --rm -it --name ctb \
-    -v d:/docker/terrain:/data \
+    -v 'd:\\docker\\terrain':'/data' \
   tumgis/ctb-quantized-mesh bash
 ```
-```bash
-winpty docker run -it --name ctb \
-    --mount source=d:\docker\terrain,target=/data/ \
-  tumgis/ctb-quantized-mesh bash
-```
+
 ##### Windows (cmd)
 ```bash
 docker run -it --name ctb ^
