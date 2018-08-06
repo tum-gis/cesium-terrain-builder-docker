@@ -1,18 +1,27 @@
 FROM debian
-RUN set -x
-RUN apt-get update
-RUN BUILD_PACKAGES='cmake build-essential git libgdal-dev' && \
-  RUNTIME_PACKAGES='gdal-bin'
 
-RUN apt-get -y install $BUILD_PACKAGES $RUNTIME_PACKAGES
-RUN cd /root && \
+ARG BUILD_PACKAGES='cmake build-essential git ca-certificates libgdal-dev'
+ARG RUNTIME_PACKAGES='gdal-bin'
+
+# Setup build and runtime packages
+RUN set -x && apt-get update && \
+  apt-get install -y --no-install-recommends $BUILD_PACKAGES $RUNTIME_PACKAGES
+# Grab source code
+RUN set -x && \
+  mkdir -p ctbtemp && cd ctbtemp && \
   git clone https://github.com/ahuarte47/cesium-terrain-builder.git && \
   cd cesium-terrain-builder && \
   git checkout master-quantized-mesh
-RUN mkdir build && cd build && cmake .. && make install . && ldconfig
+# Build & install cesium terrain builder  
+RUN set -x && \
+  cd /ctbtemp/cesium-terrain-builder && \
+  mkdir build && cd build && cmake .. && make install . && ldconfig
 # Cleanup
-RUN  apt-get purge -y --auto-remove $BUILD_PACKAGES && \
-  rm -rf /var/lib/apt/lists/*
+RUN  set -x && \
+  apt-get purge -y --auto-remove $BUILD_PACKAGES && \
+  rm -rf /var/lib/apt/lists/* && \
+  rm -rf /tmp/* && \
+  rm -rf /ctbtemp
 # Create data directory 
 RUN  mkdir -p /data
   # Add some basic aliases
