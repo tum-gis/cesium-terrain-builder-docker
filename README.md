@@ -56,7 +56,7 @@ docker run -it --name ctb \
 
 #### Windows - `cmd`
 
-```sh
+```Batchfile
 docker run -it --name ctb ^
     -v "d:/docker/terrain":"/data" ^
   tumgis/ctb-quantized-mesh
@@ -120,7 +120,7 @@ Finally, a *layer description* file needs to be created. Simply run the same com
 
 Finally, your terrain data folder should look similar to this:
 
-```sh
+```text
 $ tree -v -C -L 1 terrain/
 terrain/
 |-- 0
