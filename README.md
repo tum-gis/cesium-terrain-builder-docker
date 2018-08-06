@@ -15,7 +15,7 @@ Follow the steps described below to create your own quantized-mesh tiles for Ces
       - [Linux](#linux)
       - [Windows - `cmd`](#windows---cmd)
       - [Windows - `git-bash`](#windows---git-bash)
-    - [Create a GDAL Virtal Dataset (optional)](#create-a-gdal-virtal-dataset-optional)
+    - [Create a GDAL Virtual Dataset (optional)](#create-a-gdal-virtual-dataset-optional)
     - [Create Cesium Terrain files](#create-cesium-terrain-files)
     - [Create Cesium layer description file](#create-cesium-layer-description-file)
 
@@ -70,7 +70,7 @@ winpty docker run --rm -it --name ctb \
   tumgis/ctb-quantized-mesh
 ```
 
-### Create a GDAL Virtal Dataset (optional)
+### Create a GDAL Virtual Dataset (optional)
 
 If you dataset consists of a single file, continue to the next step. If your dataset consists of multiple tiles (more than one file), a *GDAL Virtual Dataset* needs to be created using the `gdalbuildvrt` app.
 
