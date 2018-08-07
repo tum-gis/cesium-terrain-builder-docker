@@ -1,7 +1,9 @@
 
 # Cesium Terrain Builder Docker
 
-This repo contains a `Dockerfile` for the [Cesum Terrain Builder (CTB)](https://github.com/geo-data/cesium-terrain-builder) app with support for the new Cesium terrain format *quantized-mesh*. It is build from a [pull request](https://github.com/geo-data/cesium-terrain-builder/pull/64) providing quantized-mesh support, as described in this [artice](https://www.linkedin.com/pulse/fast-cesium-terrain-rendering-new-quantized-mesh-output-alvaro-huarte/).
+This repo contains a `Dockerfile` for the [Cesum Terrain Builder (CTB)](https://github.com/geo-data/cesium-terrain-builder) app with support for the new Cesium terrain format *quantized-mesh*. It is build from a [fork](https://github.com/ahuarte47/cesium-terrain-builder/tree/master-quantized-mesh) providing quantized-mesh support, as described in this [artice](https://www.linkedin.com/pulse/fast-cesium-terrain-rendering-new-quantized-mesh-output-alvaro-huarte/).
+
+Thanks to @homme and @ahuarte47 for the great work!
 
 Follow the steps described below to create your own quantized-mesh tiles for Cesium using this Docker image:
 
@@ -27,8 +29,8 @@ The system ressources Docker can use are limited by default on Windows systems. 
 
 ### Data pre-processing
 
-It is highly recommended (but not required) to transform your data to the *WGS84* (EPSG:4326) coordinate reference system before using CTB. This helps to avoid vertial or horizontal offsets in terrain datasets.  
-Use the `NTv2` transformation method if available. This is supported by e.g. FME using the `EsriReprojector` transformer.
+It is highly recommended (but not required) to transform your data to the *WGS84* (EPSG:4326) coordinate reference system before using CTB. This helps to avoid vertial or horizontal offsets of terrain datasets.  
+Use the `NTv2` transformation method if available. This is e.g. supported by [FME](https://www.safe.com/) using the `EsriReprojector` transformer or  [ESRI ArcGIS](https://www.arcgis.com/index.html).
 
 ### Data storage
 
@@ -44,7 +46,7 @@ When your data is transformed and copied to a location available for Docker your
 
 ### Start CTB container and mount data folder
 
-First, start a CTB container and mount the data folder. Follow the examples below for different operating systems and shells.
+First, start a CTB container and mount your terrain data folder to `/data` in the container. Follow the examples below for different operating systems and shells.
 
 #### Linux
 
@@ -56,7 +58,7 @@ docker run -it --name ctb \
 
 #### Windows - `cmd`
 
-```Batchfile
+```sh
 docker run -it --name ctb ^
     -v "d:/docker/terrain":"/data" ^
   tumgis/ctb-quantized-mesh
@@ -88,7 +90,7 @@ More options to create a *GDAL Virtual Dataset* e.g. using a *list of files* are
 
 ### Create Cesium Terrain files
 
-First, create an output folder for you terrain data with `mkdir -p terrain`. Second, run CTB to create the terrain files:
+First, create an output folder for you terrain, e.g. `mkdir -p terrain`. Second, run CTB to create the terrain files:
 
 ```sh
 ctb-tile -f Mesh -C -N -o terrain <inputfile.tif or input.vrt>
@@ -104,19 +106,12 @@ The `ctb-tile` app supports several options. Run `ctb-tile --help` to display al
 
 ### Create Cesium layer description file
 
-Finally, a *layer description* file needs to be created. Simply run the same command you used for creating the terrain file again using the `-l` switch. For instance:
+Finally, a *layer description* file needs to be created. Simply run the same command you used for creating the terrain files again adding the `-l` switch. For instance:
 
-- Create terrain files:
-
-  ```sh
-  ctb-tile -f Mesh -C -N -o terrain rasterTerrain.tif
-  ```
-
-- Create layer description file:
-
-  ```sh
-  ctb-tile -f Mesh -C -N -l -o terrain tile.vrt
-  ```
+```sh
+ctb-tile -f Mesh -C -N -o terrain rasterTerrain.tif   # Create terrain files
+ctb-tile -f Mesh -C -N -l -o terrain tile.vrt         # Create layer description file
+```
 
 Finally, your terrain data folder should look similar to this:
 
