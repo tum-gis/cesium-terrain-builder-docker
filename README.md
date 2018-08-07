@@ -1,4 +1,6 @@
 
+[![Build Status](https://travis-ci.org/tum-gis/cesium-terrain-builder-docker.svg?branch=master)](https://travis-ci.org/tum-gis/cesium-terrain-builder-docker)
+
 # Cesium Terrain Builder Docker
 
 This repo contains a `Dockerfile` for the [Cesum Terrain Builder (CTB)](https://github.com/geo-data/cesium-terrain-builder) app with support for the new Cesium terrain format *quantized-mesh*. It is build from a [fork](https://github.com/ahuarte47/cesium-terrain-builder/tree/master-quantized-mesh) providing quantized-mesh support, as described in this [artice](https://www.linkedin.com/pulse/fast-cesium-terrain-rendering-new-quantized-mesh-output-alvaro-huarte/). Thanks to @homme and @ahuarte47 for the great work!
