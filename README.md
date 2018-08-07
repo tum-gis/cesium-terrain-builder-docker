@@ -1,25 +1,24 @@
 
 # Cesium Terrain Builder Docker
 
-This repo contains a `Dockerfile` for the [Cesum Terrain Builder (CTB)](https://github.com/geo-data/cesium-terrain-builder) app with support for the new Cesium terrain format *quantized-mesh*. It is build from a [fork](https://github.com/ahuarte47/cesium-terrain-builder/tree/master-quantized-mesh) providing quantized-mesh support, as described in this [artice](https://www.linkedin.com/pulse/fast-cesium-terrain-rendering-new-quantized-mesh-output-alvaro-huarte/).
+This repo contains a `Dockerfile` for the [Cesum Terrain Builder (CTB)](https://github.com/geo-data/cesium-terrain-builder) app with support for the new Cesium terrain format *quantized-mesh*. It is build from a [fork](https://github.com/ahuarte47/cesium-terrain-builder/tree/master-quantized-mesh) providing quantized-mesh support, as described in this [artice](https://www.linkedin.com/pulse/fast-cesium-terrain-rendering-new-quantized-mesh-output-alvaro-huarte/). Thanks to @homme and @ahuarte47 for the great work!
 
-Thanks to @homme and @ahuarte47 for the great work!
+If you experience problems or want to contribute please create an [issue](https://github.com/tum-gis/cesium-terrain-builder-docker/issues) or [pull request](https://github.com/tum-gis/cesium-terrain-builder-docker/pulls).
 
-Follow the steps described below to create your own quantized-mesh tiles for Cesium using this Docker image:
+Follow the steps below to create your own quantized-mesh tiles for Cesium using this Docker image:
 
-- [Cesium Terrain Builder Docker](#cesium-terrain-builder-docker)
-  - [Preparation](#preparation)
-    - [Docker settings](#docker-settings)
-    - [Data pre-processing](#data-pre-processing)
-    - [Data storage](#data-storage)
-  - [Cesium Terrain Builder usage](#cesium-terrain-builder-usage)
-    - [Start CTB container and mount data folder](#start-ctb-container-and-mount-data-folder)
-      - [Linux](#linux)
-      - [Windows - `cmd`](#windows---cmd)
-      - [Windows - `git-bash`](#windows---git-bash)
-    - [Create a GDAL Virtual Dataset (optional)](#create-a-gdal-virtual-dataset-optional)
-    - [Create Cesium Terrain files](#create-cesium-terrain-files)
-    - [Create Cesium layer description file](#create-cesium-layer-description-file)
+- [Preparation](#preparation)
+  - [Docker settings](#docker-settings)
+  - [Data pre-processing](#data-pre-processing)
+  - [Data storage](#data-storage)
+- [Cesium Terrain Builder usage](#cesium-terrain-builder-usage)
+  - [Start CTB container and mount data folder](#start-ctb-container-and-mount-data-folder)
+    - [Linux](#linux)
+    - [Windows - `cmd`](#windows---cmd)
+    - [Windows - `git-bash`](#windows---git-bash)
+  - [Create a GDAL Virtual Dataset (optional)](#create-a-gdal-virtual-dataset-optional)
+  - [Create Cesium Terrain files](#create-cesium-terrain-files)
+  - [Create Cesium layer description file](#create-cesium-layer-description-file)
 
 ## Preparation
 
