@@ -6,6 +6,9 @@
 This repo contains a `Dockerfile` for the [Cesum Terrain Builder (CTB)](https://github.com/geo-data/cesium-terrain-builder) app with support for the new Cesium terrain format *quantized-mesh*. It is build from a [fork](https://github.com/ahuarte47/cesium-terrain-builder/tree/master-quantized-mesh) providing quantized-mesh support, as described in this [artice](https://www.linkedin.com/pulse/fast-cesium-terrain-rendering-new-quantized-mesh-output-alvaro-huarte/).  
 Thanks to [@homme](https://github.com/homme) and [@ahuarte47](https://github.com/ahuarte47) for the great work on Cesium Terrain Builder and quantized-mesh support.
 
+The Docker image is available on DockerHub from [tumgis](https://hub.docker.com/r/tumgis/). To get the image run:  
+`docker pull tumgis/ctb-quantized-mesh`
+
 If you experience problems or want to contribute please create an [issue](https://github.com/tum-gis/cesium-terrain-builder-docker/issues) or [pull request](https://github.com/tum-gis/cesium-terrain-builder-docker/pulls).
 
 Follow the steps below to create your own quantized-mesh tiles for Cesium using this Docker image:
