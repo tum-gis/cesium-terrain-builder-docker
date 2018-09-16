@@ -112,8 +112,8 @@ The `ctb-tile` app supports several options. Run `ctb-tile --help` to display al
 Finally, a *layer description* file needs to be created. Simply run the same command you used for creating the terrain files again adding the `-l` switch. For instance:
 
 ```sh
-ctb-tile -f Mesh -C -N -o terrain rasterTerrain.tif   # Create terrain files
-ctb-tile -f Mesh -C -N -l -o terrain tile.vrt         # Create layer description file
+ctb-tile -f Mesh -C -N -o terrain tiles.vrt            # Create terrain files
+ctb-tile -f Mesh -C -N -l -o terrain tiles.vrt         # Create layer description file
 ```
 
 Finally, your terrain data folder should look similar to this:
