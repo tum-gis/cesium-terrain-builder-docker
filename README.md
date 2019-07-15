@@ -39,11 +39,9 @@ Use the `NTv2` transformation method if available. This is e.g. supported by [FM
 
 ### Data storage
 
-Put your data in a folder, that can be mounted by Docker. On Windows, you will have to grant access to the drive where the data is located before being able the mount the folder. Goto *Docker tray Icon* -> *Settings* -> *Shared Drives* to share drives with Docker. Visit this [blog post](https://rominirani.com/docker-on-windows-mounting-host-directories-d96f3f056a2c) for a comprehensive guide on mounting host directories on Windows.
+Put your data in a folder, that can be mounted by Docker. On Windows, you will have to grant access to the drive where the data is located before being able to mount the folder. Goto *Docker tray Icon* -> *Settings* -> *Shared Drives* to share drives with Docker. Visit this [blog post](https://rominirani.com/docker-on-windows-mounting-host-directories-d96f3f056a2c) for a comprehensive guide on mounting host directories on Windows.
 
-In the following we assume that your terrain data is stored in `d:\docker\terrain` for a Windows Docker host and drive `d:\` is shared with Docker.
-
-For a Linux Docker host we assume your data is stored in `/docker/terrain`.
+In the following we assume that your terrain data is stored in `d:\docker\terrain` for a Windows Docker host and drive `d:\` is shared with Docker. For a Linux Docker host we assume your data is stored in `/docker/terrain`.
 
 ## Cesium Terrain Builder usage
 
@@ -114,8 +112,8 @@ The `ctb-tile` app supports several options. Run `ctb-tile --help` to display al
 Finally, a *layer description* file needs to be created. Simply run the same command you used for creating the terrain files again adding the `-l` switch. For instance:
 
 ```sh
-ctb-tile -f Mesh -C -N -o terrain rasterTerrain.tif   # Create terrain files
-ctb-tile -f Mesh -C -N -l -o terrain tile.vrt         # Create layer description file
+ctb-tile -f Mesh -C -N -o terrain tiles.vrt            # Create terrain files
+ctb-tile -f Mesh -C -N -l -o terrain tiles.vrt         # Create layer description file
 ```
 
 Finally, your terrain data folder should look similar to this:
