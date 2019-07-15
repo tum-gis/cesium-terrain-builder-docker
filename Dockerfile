@@ -1,4 +1,4 @@
-FROM debian
+FROM debian:stretch
 
 ARG BUILD_PACKAGES='cmake build-essential git ca-certificates libgdal-dev'
 ARG RUNTIME_PACKAGES='gdal-bin'
