@@ -1,9 +1,9 @@
 
-[![Build Status](https://travis-ci.org/tum-gis/cesium-terrain-builder-docker.svg?branch=master)](https://travis-ci.org/tum-gis/cesium-terrain-builder-docker)
+[![Build Status](https://travis-ci.com/tum-gis/cesium-terrain-builder-docker.svg?branch=master)](https://travis-ci.com/tum-gis/cesium-terrain-builder-docker)
 
 # Cesium Terrain Builder Docker
 
-This repo contains a `Dockerfile` for the [Cesum Terrain Builder (CTB)](https://github.com/geo-data/cesium-terrain-builder) app with support for the new Cesium terrain format *quantized-mesh*. It is build from a [fork](https://github.com/ahuarte47/cesium-terrain-builder/tree/master-quantized-mesh) providing quantized-mesh support, as described in this [artice](https://www.linkedin.com/pulse/fast-cesium-terrain-rendering-new-quantized-mesh-output-alvaro-huarte/).  
+This repo contains a `Dockerfile` for the [Cesum Terrain Builder (CTB)](https://github.com/geo-data/cesium-terrain-builder) app with support for the new Cesium terrain format *quantized-mesh*. It is build from a [fork](https://github.com/ahuarte47/cesium-terrain-builder/tree/master-quantized-mesh) providing quantized-mesh support, as described in this [artice](https://www.linkedin.com/pulse/fast-cesium-terrain-rendering-new-quantized-mesh-output-alvaro-huarte/).
 Thanks to [@homme](https://github.com/homme) and [@ahuarte47](https://github.com/ahuarte47) for the great work on Cesium Terrain Builder and quantized-mesh support.
 
 The Docker image is available on DockerHub from [tumgis](https://hub.docker.com/r/tumgis/). To get the image run: `docker pull tumgis/ctb-quantized-mesh`
@@ -14,18 +14,19 @@ If you experience problems or want to contribute please create an [issue](https:
 
 Follow the steps below to create your own quantized-mesh tiles for Cesium using this Docker image:
 
-- [Preparation](#preparation)
-  - [Docker settings](#docker-settings)
-  - [Data pre-processing](#data-pre-processing)
-  - [Data storage](#data-storage)
-- [Cesium Terrain Builder usage](#cesium-terrain-builder-usage)
-  - [Start CTB container and mount data folder](#start-ctb-container-and-mount-data-folder)
-    - [Linux](#linux)
-    - [Windows - `cmd`](#windows---cmd)
-    - [Windows - `git-bash`](#windows---git-bash)
-  - [Create a GDAL Virtual Dataset (optional)](#create-a-gdal-virtual-dataset-optional)
-  - [Create Cesium Terrain files](#create-cesium-terrain-files)
-  - [Create Cesium layer description file](#create-cesium-layer-description-file)
+- [Cesium Terrain Builder Docker](#cesium-terrain-builder-docker)
+  - [Preparation](#preparation)
+    - [Docker settings](#docker-settings)
+    - [Data pre-processing](#data-pre-processing)
+    - [Data storage](#data-storage)
+  - [Cesium Terrain Builder usage](#cesium-terrain-builder-usage)
+    - [Start CTB container and mount data folder](#start-ctb-container-and-mount-data-folder)
+      - [Linux](#linux)
+      - [Windows - `cmd`](#windows---cmd)
+      - [Windows - `git-bash`](#windows---git-bash)
+    - [Create a GDAL Virtual Dataset (optional)](#create-a-gdal-virtual-dataset-optional)
+    - [Create Cesium Terrain files](#create-cesium-terrain-files)
+    - [Create Cesium layer description file](#create-cesium-layer-description-file)
 
 ## Preparation
 
@@ -35,7 +36,7 @@ The system ressources Docker can use are limited by default on Windows systems. 
 
 ### Data pre-processing
 
-It is highly recommended (but not required) to transform your data to the *WGS84* (EPSG:4326) coordinate reference system before using CTB. This helps to avoid vertial or horizontal offsets of terrain datasets.  
+It is highly recommended (but not required) to transform your data to the *WGS84* (EPSG:4326) coordinate reference system before using CTB. This helps to avoid vertial or horizontal offsets of terrain datasets.
 Use the `NTv2` transformation method if available. This is e.g. supported by [FME](https://www.safe.com/) using the `EsriReprojector` transformer or  [ESRI ArcGIS](https://www.arcgis.com/index.html).
 
 ### Data storage
@@ -56,7 +57,7 @@ First, start a CTB container and mount your terrain data folder to `/data` in th
 
 ```bash
 docker run -it --name ctb \
-    -v "/docker/terrain":"/data" \  
+    -v "/docker/terrain":"/data" \
   tumgis/ctb-quantized-mesh
 ```
 
