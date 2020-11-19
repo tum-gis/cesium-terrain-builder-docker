@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM debian:buster
 
 ARG BUILD_PACKAGES='cmake build-essential git ca-certificates libgdal-dev'
 ARG RUNTIME_PACKAGES='gdal-bin'
@@ -12,7 +12,7 @@ RUN set -x && \
   git clone https://github.com/ahuarte47/cesium-terrain-builder.git && \
   cd cesium-terrain-builder && \
   git checkout master-quantized-mesh
-# Build & install cesium terrain builder  
+# Build & install cesium terrain builder
 RUN set -x && \
   cd /ctbtemp/cesium-terrain-builder && \
   mkdir build && cd build && cmake .. && make install . && ldconfig
@@ -22,7 +22,7 @@ RUN  set -x && \
   rm -rf /var/lib/apt/lists/* && \
   rm -rf /tmp/* && \
   rm -rf /ctbtemp
-# Create data directory 
+# Create data directory
 RUN  mkdir -p /data
   # Add some basic aliases
 RUN  echo 'alias ..="cd .."' >> ~/.bashrc && \
