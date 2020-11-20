@@ -1,18 +1,18 @@
 os: linux
-dist: bionic
+dist: focal
 language: shell
 services:
 - docker
 before_install:
-- docker build -t tumgis/ctb-quantized-mesh .
+- docker build -t tumgis/ctb-quantized-mesh:small .
 script:
-- docker run --rm --name ctb tumgis/ctb-quantized-mesh "ctb-tile" "--version" | grep
+- docker run --rm --name ctb tumgis/ctb-quantized-mesh:small "ctb-tile" "--version" | grep
   -i "[0-9]\.[0-9]\.[0-9]"
-- docker run --rm --name ctb tumgis/ctb-quantized-mesh "gdalbuildvrt" "--version"
+- docker run --rm --name ctb tumgis/ctb-quantized-mesh:small "gdalbuildvrt" "--version"
   | grep -i "GDAL [0-9]\.[0-9]\.[0-9].*"
 after_success:
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-- docker push tumgis/ctb-quantized-mesh
+- docker push tumgis/ctb-quantized-mesh:small
 notifications:
   slack:
     secure: I23zj/PKoiZplWWnlc73JE+3BVvULz3a/aqVctPKHWqnWCjThphQCAY2p/eoip3/0D4uY5pOQQafAqVm8fhAU80IfS3CQou0+x/5W3w6bGMVDkvEbcxOga+rU5vm/VMlXVUep5gweOl7XvOL1V/ukWZgZOaBYJn25WGiAIvgZ3DAcbj/AUGZE6f7zaDbSTo2P1CoE9Das09rx3FySkbCPW7rGUBPYdApGB+5aO4Dd7Kk9sDjDajYYu5rxMg+8W4tfbAb1fFB2w+KIouv/LTUITB6iBE4w+4tQb0L5pFh0lr6GC2C8PDfCkiO/0KqmWaf6kcg3WbUo9FAxF3uLzjJ+kD/GjqAyjUXd0b/GZWCBuei3+A7OVbQDf6oIZZTN3CDwhwO5GbeghPRLAH9EkmkrHi7ELOUeS2NH6j3q7Ltexhrr6pPIN8ofqPKkg1P1NYF6RRIAYdZn7Ci8SuIoEKdhRiYR3D1zi19HqEukJlwu2B/g/u8JPY7rd5jpnjnVkKTS4rWGLxAzU6SaCrPnmJUVE26dIKbFFfkjgj6faEQe14W83bJKuL6tW0oLxVgL2LG0ssVIRvB4bhaHQ4zrupO20iBHbWAPYDT0ZC3XdFOPb6JFTE7l6nSC6/mxI50+Ihn3/2wB1R0rnx7A3NOkQfjjx7HZ1RVuIlQDrayXoEO8Sg=
