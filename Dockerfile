@@ -1,10 +1,3 @@
-# Labels ######################################################################
-LABEL maintainer="Bruno Willenborg"
-LABEL maintainer.email="b.willenborg(at)tum.de"
-LABEL maintainer.organization="Chair of Geoinformatics, Technical University of Munich (TUM)"
-LABEL source.repo="https://github.com/tum-gis/https://github.com/tum-gis/cesium-terrain-builder-docker"
-LABEL docker.image="tumgis/ctb-quantized-mesh"
-
 # Fetch stage #################################################################
 FROM debian:buster AS fetchstage
 ARG FETCH_PACKAGES='git ca-certificates'
@@ -61,3 +54,10 @@ RUN set -x && apt-get update && \
   echo 'alias lla="ls -laFh --group-directories-first  --color=auto"' >> ~/.bashrc
 
 CMD ["bash"]
+
+# Labels ######################################################################
+LABEL maintainer="Bruno Willenborg"
+LABEL maintainer.email="b.willenborg(at)tum.de"
+LABEL maintainer.organization="Chair of Geoinformatics, Technical University of Munich (TUM)"
+LABEL source.repo="https://github.com/tum-gis/https://github.com/tum-gis/cesium-terrain-builder-docker"
+LABEL docker.image="tumgis/ctb-quantized-mesh"
