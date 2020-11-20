@@ -1,3 +1,10 @@
+# Labels ######################################################################
+LABEL maintainer="Bruno Willenborg"
+LABEL maintainer.email="b.willenborg(at)tum.de"
+LABEL maintainer.organization="Chair of Geoinformatics, Technical University of Munich (TUM)"
+LABEL source.repo="https://github.com/tum-gis/https://github.com/tum-gis/cesium-terrain-builder-docker"
+LABEL docker.image="tumgis/ctb-quantized-mesh"
+
 # Fetch stage #################################################################
 FROM debian:buster AS fetchstage
 ARG FETCH_PACKAGES='git ca-certificates'
@@ -39,7 +46,6 @@ RUN  set -x && \
 # Runtime stage ###############################################################
 FROM debian:buster-slim
 ARG RUNTIME_PACKAGES='gdal-bin'
-COPY --from=buildstage /usr/local/bin/ctb-export /usr/local/bin/ctb-export
 COPY --from=buildstage /usr/local/include/ctb /usr/local/include/ctb
 COPY --from=buildstage /usr/local/lib/libctb.so /usr/local/lib/libctb.so
 COPY --from=buildstage /usr/local/bin/ctb-* /usr/local/bin/
