@@ -27,7 +27,15 @@ or [pull request](https://github.com/tum-gis/cesium-terrain-builder-docker/pulls
 
 Follow the steps below to create your own quantized-mesh tiles for Cesium using this Docker image:
 
+## News
+
+* 2020-11: Reduced image size to less than 250 MB
+
+## Content
+
 - [Cesium Terrain Builder Docker](#cesium-terrain-builder-docker)
+  - [News](#news)
+  - [Content](#content)
   - [Preparation](#preparation)
     - [Docker settings](#docker-settings)
     - [Data pre-processing](#data-pre-processing)
