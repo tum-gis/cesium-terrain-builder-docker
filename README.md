@@ -31,8 +31,10 @@ Follow the steps below to create your own quantized-mesh tiles for Cesium using 
 The Docker images are available on DockerHub from [tumgis](https://hub.docker.com/r/tumgis/).
 To get the image run: `docker pull tumgis/ctb-quantized-mesh:<TAG>` Following tags are available:
 
-* ``latest`` [![Build Status](https://travis-ci.com/tum-gis/cesium-terrain-builder-docker.svg?branch=master)](https://travis-ci.com/tum-gis/cesium-terrain-builder-docker): Latest image build based on Debian and GDAL 2.1.2
-* ``alpine`` [![Build Status](https://travis-ci.com/tum-gis/cesium-terrain-builder-docker.svg?branch=alpine)](https://travis-ci.com/tum-gis/cesium-terrain-builder-docker): Image based on leightweight Alpine Linux v3.12 and GDAL v3.14
+| Tag        | Build status                                                                                                                                                  | Description                                                          |
+|------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------:|----------------------------------------------------------------------|
+| ``latest`` | [![Build Status](https://travis-ci.com/tum-gis/cesium-terrain-builder-docker.svg?branch=master)](https://travis-ci.com/tum-gis/cesium-terrain-builder-docker) | Latest image build based on Debian and GDAL 2.1.2                    |
+| ``alpine`` | [![Build Status](https://travis-ci.com/tum-gis/cesium-terrain-builder-docker.svg?branch=alpine)](https://travis-ci.com/tum-gis/cesium-terrain-builder-docker) | Image based on leightweight Alpine Linux v3.12 and GDAL v3.14        |
 
 ## Content
 
