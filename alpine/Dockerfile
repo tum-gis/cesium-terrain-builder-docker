@@ -64,3 +64,11 @@ RUN set -ex && \
   rm -rf /tmp/*
 
 CMD ["bash"]
+
+# Labels ######################################################################
+LABEL maintainer="Bruno Willenborg"
+LABEL maintainer.email="b.willenborg(at)tum.de"
+LABEL maintainer.organization="Chair of Geoinformatics, Technical University of Munich (TUM)"
+LABEL source.repo="https://github.com/tum-gis/https://github.com/tum-gis/cesium-terrain-builder-docker"
+LABEL docker.image="tumgis/ctb-quantized-mesh"
+LABEL docker.image.tag "alpine"
