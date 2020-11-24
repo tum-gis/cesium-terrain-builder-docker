@@ -1,4 +1,5 @@
-FROM alpine:3.12
+# Fetch stage #################################################################
+FROM alpine:3.12 AS fetchstage
 
 ARG gdal_version='3.1.4-r0'
 ENV GDAL_VERSION=${gdal_version}
@@ -10,37 +11,29 @@ RUN set -ex && \
 
 # Fetch source code
 RUN set -x && \
-  mkdir -p ctbtemp && cd ctbtemp && \->
+  mkdir -p ctbtemp && cd ctbtemp && \
   git clone https://github.com/ahuarte47/cesium-terrain-builder.git && \
   cd cesium-terrain-builder && \
   git checkout master-quantized-mesh
 
+# Build stage #################################################################
+FROM alpine:3.12 AS buildstage
+COPY --from fetchstage /ctbtemp /ctbtemp
+
 # Setup build deps
 RUN set -ex && \
   apk add --no-cache --virtual .build-deps \
-    make cmake libxml2-dev
-
-RUN set -ex && \
-  apk add --no-cache --virtual .build-deps-edge \
-    --repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
-    --repository http://dl-cdn.alpinelinux.org/alpine/edge/community \
-    g++ gdal-dev
+    make cmake libxml2-dev g++ gdal-dev
 
 # Build & install cesium terrain builder
 RUN set -x && \
   cd /ctbtemp/cesium-terrain-builder && \
-  mkdir build && cd build && cmake .. && make install .
+  mkdir build && cd build && cmake .. && make install . && ls -lah /usr/bin/
 
 # Setup runtime deps
 RUN set -ex && \
   apk add --no-cache --virtual .rundeps \
-  bash
-
-RUN set -ex && \
-  apk add --no-cache --virtual .rundeps-edge \
-    --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \
-    --repository http://dl-cdn.alpinelinux.org/alpine/edge/community \
-    gdal=$GDAL_VERSION gdal-tools=$GDAL_VERSION
+  bash gdal=$GDAL_VERSION gdal-tools=$GDAL_VERSION
 
 # Cleanup
 RUN  set -x && \
