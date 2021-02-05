@@ -54,6 +54,9 @@ To get the image run: `docker pull tumgis/ctb-quantized-mesh:<TAG>` Following ta
     - [Create a GDAL Virtual Dataset (optional)](#create-a-gdal-virtual-dataset-optional)
     - [Create Cesium Terrain files](#create-cesium-terrain-files)
     - [Create Cesium layer description file](#create-cesium-layer-description-file)
+  - [Troubleshooting](#troubleshooting)
+    - [Performance issues](#performance-issues)
+    - [Handling large datasets](#handling-large-datasets)
 
 ## Preparation
 
@@ -193,3 +196,37 @@ terrain/
 ```
 
 The quantized-mesh terrain is now ready for usage.
+
+## Troubleshooting
+
+### Performance issues
+
+Read the [recommendations](https://github.com/geo-data/cesium-terrain-builder#recommendations) for `ctb-tile`
+carefully, especially when handling large datasets.
+
+### Handling large datasets
+
+Datasets with a big extent can lead to overflow errors on lower zoom levels:
+
+```text
+0...10...20...30...40...50...60...70...80...90...ERROR 1: Integer overflow : nSrcXSize=41494, nSrcYSize=16585
+ERROR 1: IReadBlock failed at X offset 0, Y offset 0: Integer overflow : nSrcXSize=41494, nSrcYSize=16585
+ERROR 1: Integer overflow : nSrcXSize=41494, nSrcYSize=16585
+ERROR 1: IReadBlock failed at X offset 0, Y offset 0: Integer overflow : nSrcXSize=41494, nSrcYSize=16585
+ERROR 1: IReadBlock failed at X offset 0, Y offset 0: IReadBlock failed at X offset 0, Y offset 0: Integer overflow : nSrcXSize=41494, nSrcYSize=16585
+ERROR 1: Integer overflow : nSrcXSize=41494, nSrcYSize=16585
+ERROR 1: IReadBlock failed at X offset 0, Y offset 0: Integer overflow : nSrcXSize=41494, nSrcYSize=16585
+ERROR 1: IReadBlock failed at X offset 0, Y offset 0: IReadBlock failed at X offset 0, Y offset 0: Integer overflow : nSrcXSize=41494, nSrcYSize=16585
+ERROR 1: Integer overflow : nSrcXSize=41494, nSrcYSize=16585
+ERROR 1: IReadBlock failed at X offset 0, Y offset 0: Integer overflow : nSrcXSize=41494, nSrcYSize=16585
+ERROR 1: IReadBlock failed at X offset 0, Y offset 0: IReadBlock failed at X offset 0, Y offset 0: Integer overflow : nSrcXSize=41494, nSrcYSize=16585
+```
+
+As described [here](https://github.com/tum-gis/cesium-terrain-builder-docker/issues/3#issuecomment-772680266),
+this is caused by GDAL trying to create overviews from input data.
+A possible solution is to create simplified versions of the input data with lower resolutions and use them
+for creating the mesh tiles on lower levels.
+This can be done using e.g. [gdal_translate](https://gdal.org/programs/gdal_translate.html).
+After that, try to create mesh tiles using `ctb-tile` with the resolutions that do not crash starting from
+level 0.
+Try to use the highest resolution possible that does not crash for each level.
