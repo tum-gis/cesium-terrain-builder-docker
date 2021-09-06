@@ -4,8 +4,8 @@ language: shell
 services:
 - docker
 before_install:
-- docker build -t tumgis/ctb-quantized-mesh
-- docker build -t tumgis/ctb-quantized-mesh:alpine .
+- docker build -t tumgis/ctb-quantized-mesh .
+- docker build -t tumgis/ctb-quantized-mesh:alpine -f Dockerfile.alpine .
 script:
 - docker run --rm --name ctb tumgis/ctb-quantized-mesh:alpine "ctb-tile" "--version" | grep
   -i "[0-9]\.[0-9]\.[0-9]"
