@@ -21,7 +21,7 @@ RUN  set -x && \
 FROM alpine:3.12 AS buildstage
 COPY --from=fetchstage /ctbtemp /ctbtemp
 
-ARG gdal_version='3.1.4-r0'
+ARG gdal_version='3.1.4-r4'
 ENV GDAL_VERSION=${gdal_version}
 
 # Setup build deps
