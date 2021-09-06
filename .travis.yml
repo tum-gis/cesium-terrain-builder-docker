@@ -13,9 +13,9 @@ script:
   | grep -i "GDAL [0-9]\.[0-9]\.[0-9].*"
 
 - docker run --rm --name ctb tumgis/ctb-quantized-mesh "ctb-tile" "--version" | grep
--i "[0-9]\.[0-9]\.[0-9]"
+  -i "[0-9]\.[0-9]\.[0-9]"
 - docker run --rm --name ctb tumgis/ctb-quantized-mesh "gdalbuildvrt" "--version"
-| grep -i "GDAL [0-9]\.[0-9]\.[0-9].*"
+  | grep -i "GDAL [0-9]\.[0-9]\.[0-9].*"
 after_success:
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 - docker push tumgis/ctb-quantized-mesh
