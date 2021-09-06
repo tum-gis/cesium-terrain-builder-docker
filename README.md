@@ -1,6 +1,3 @@
-
-[![Build Status](https://travis-ci.com/tum-gis/cesium-terrain-builder-docker.svg?branch=master)](https://travis-ci.com/tum-gis/cesium-terrain-builder-docker)
-
 # Cesium Terrain Builder Docker
 
 This repo contains a `Dockerfile` for the [Cesum Terrain Builder (CTB)](https://github.com/geo-data/cesium-terrain-builder)
@@ -13,9 +10,6 @@ Information on the most recent development of this fork is available in this
 Thanks to [@homme](https://github.com/homme) and [@ahuarte47](https://github.com/ahuarte47)
 for the great work on Cesium Terrain Builder and quantized-mesh support.
 
-The Docker image is available on DockerHub from [tumgis](https://hub.docker.com/r/tumgis/).
-To get the image run: `docker pull tumgis/ctb-quantized-mesh`
-
 > **Note:** The images are rebuild on every push to
 > [ahuarte47/cesium-terrain-builder/tree/master-quantized-mesh](https://github.com/ahuarte47/cesium-terrain-builder/tree/master-quantized-mesh).
 > Goto [hub.docker.com/r/tumgis/ctb-quantized-mesh](https://hub.docker.com/r/tumgis/ctb-quantized-mesh)
@@ -25,16 +19,28 @@ If you experience problems or want to contribute please create an
 [issue](https://github.com/tum-gis/cesium-terrain-builder-docker/issues)
 or [pull request](https://github.com/tum-gis/cesium-terrain-builder-docker/pulls).
 
-Follow the steps below to create your own quantized-mesh tiles for Cesium using this Docker image:
+Follow the steps below to create your own quantized-mesh tiles for Cesium using this Docker image.
 
 ## News
 
-* 2020-11: Reduced image size to less than 250 MB
+* 2020-11: Updated ``alpine`` image to Alpine v3.12 and GDAL v3.14
+* 2020-11: Reduced size of all images using multi stage builds.
+
+## Image variants
+
+The Docker images are available on DockerHub from [tumgis](https://hub.docker.com/r/tumgis/).
+To get the image run: `docker pull tumgis/ctb-quantized-mesh:<TAG>` Following tags are available:
+
+| Tag        | Build status                                                                                                                                                  | Description                                                          |
+|------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------:|----------------------------------------------------------------------|
+| ``latest`` | [![Build Status](https://travis-ci.com/tum-gis/cesium-terrain-builder-docker.svg?branch=master)](https://travis-ci.com/tum-gis/cesium-terrain-builder-docker) | Latest image build based on Debian and GDAL 2.1.2                    |
+| ``alpine`` | [![Build Status](https://travis-ci.com/tum-gis/cesium-terrain-builder-docker.svg?branch=alpine)](https://travis-ci.com/tum-gis/cesium-terrain-builder-docker) | Image based on leightweight Alpine Linux v3.12 and GDAL v3.14        |
 
 ## Content
 
 - [Cesium Terrain Builder Docker](#cesium-terrain-builder-docker)
   - [News](#news)
+  - [Image variants](#image-variants)
   - [Content](#content)
   - [Preparation](#preparation)
     - [Docker settings](#docker-settings)
@@ -48,6 +54,9 @@ Follow the steps below to create your own quantized-mesh tiles for Cesium using 
     - [Create a GDAL Virtual Dataset (optional)](#create-a-gdal-virtual-dataset-optional)
     - [Create Cesium Terrain files](#create-cesium-terrain-files)
     - [Create Cesium layer description file](#create-cesium-layer-description-file)
+  - [Troubleshooting](#troubleshooting)
+    - [Performance issues](#performance-issues)
+    - [Handling large datasets](#handling-large-datasets)
 
 ## Preparation
 
@@ -187,3 +196,37 @@ terrain/
 ```
 
 The quantized-mesh terrain is now ready for usage.
+
+## Troubleshooting
+
+### Performance issues
+
+Read the [recommendations](https://github.com/geo-data/cesium-terrain-builder#recommendations) for `ctb-tile`
+carefully, especially when handling large datasets.
+
+### Handling large datasets
+
+Datasets with a big extent can lead to overflow errors on lower zoom levels:
+
+```text
+0...10...20...30...40...50...60...70...80...90...ERROR 1: Integer overflow : nSrcXSize=41494, nSrcYSize=16585
+ERROR 1: IReadBlock failed at X offset 0, Y offset 0: Integer overflow : nSrcXSize=41494, nSrcYSize=16585
+ERROR 1: Integer overflow : nSrcXSize=41494, nSrcYSize=16585
+ERROR 1: IReadBlock failed at X offset 0, Y offset 0: Integer overflow : nSrcXSize=41494, nSrcYSize=16585
+ERROR 1: IReadBlock failed at X offset 0, Y offset 0: IReadBlock failed at X offset 0, Y offset 0: Integer overflow : nSrcXSize=41494, nSrcYSize=16585
+ERROR 1: Integer overflow : nSrcXSize=41494, nSrcYSize=16585
+ERROR 1: IReadBlock failed at X offset 0, Y offset 0: Integer overflow : nSrcXSize=41494, nSrcYSize=16585
+ERROR 1: IReadBlock failed at X offset 0, Y offset 0: IReadBlock failed at X offset 0, Y offset 0: Integer overflow : nSrcXSize=41494, nSrcYSize=16585
+ERROR 1: Integer overflow : nSrcXSize=41494, nSrcYSize=16585
+ERROR 1: IReadBlock failed at X offset 0, Y offset 0: Integer overflow : nSrcXSize=41494, nSrcYSize=16585
+ERROR 1: IReadBlock failed at X offset 0, Y offset 0: IReadBlock failed at X offset 0, Y offset 0: Integer overflow : nSrcXSize=41494, nSrcYSize=16585
+```
+
+As described [here](https://github.com/tum-gis/cesium-terrain-builder-docker/issues/3#issuecomment-772680266),
+this is caused by GDAL trying to create overviews from input data.
+A possible solution is to create simplified versions of the input data with lower resolutions and use them
+for creating the mesh tiles on lower levels.
+This can be done using e.g. [gdal_translate](https://gdal.org/programs/gdal_translate.html).
+After that, try to create mesh tiles using `ctb-tile` with the resolutions that do not crash starting from
+level 0.
+Try to use the highest resolution possible that does not crash for each level.
