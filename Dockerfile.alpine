@@ -57,6 +57,7 @@ RUN set -ex && \
   apk update && \
   apk add --no-cache --virtual .rundeps \
   bash gdal=$GDAL_VERSION gdal-tools=$GDAL_VERSION && \
+  echo 'shopt -s globstar' >> ~/.bashrc && \
   echo 'alias ..="cd .."' >> ~/.bashrc && \
   echo 'alias l="ls -CF --group-directories-first --color=auto"' >> ~/.bashrc && \
   echo 'alias ll="ls -lFh --group-directories-first --color=auto"' >> ~/.bashrc && \

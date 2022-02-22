@@ -48,6 +48,7 @@ WORKDIR /data
 RUN set -x && apt-get update && \
   apt-get install -y --no-install-recommends $RUNTIME_PACKAGES && \
   ldconfig && \
+  echo 'shopt -s globstar' >> ~/.bashrc && \
   echo 'alias ..="cd .."' >> ~/.bashrc && \
   echo 'alias l="ls -CF --group-directories-first --color=auto"' >> ~/.bashrc && \
   echo 'alias ll="ls -lFh --group-directories-first --color=auto"' >> ~/.bashrc && \
