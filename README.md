@@ -95,7 +95,7 @@ are ready for creating a Cesium terrain with CTB.
 ### Start CTB container and mount data folder
 
 Before starting CTB it is recommended to pull the latest image version using
-`docker pull tumgis/ctb-dquantized-mesh`.
+`docker pull tumgis/ctb-quantized-mesh`.
 After that, start a CTB container and mount your terrain data folder to `/data` in the container.
 Follow the examples below for different operating systems and shells.
 
