@@ -111,7 +111,7 @@ docker run -it --name ctb \
 
 ```sh
 docker run -it --name ctb ^
-    -v "d:/docker/terrain":"/data" ^
+    -v d:\docker\terrain:/data ^
   tumgis/ctb-quantized-mesh
 ```
 
