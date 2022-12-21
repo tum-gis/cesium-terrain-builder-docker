@@ -51,6 +51,7 @@ To get the image run: `docker pull tumgis/ctb-quantized-mesh:<TAG>` Following ta
       - [Linux - `bash`](#linux---bash)
       - [Windows - `cmd`](#windows---cmd)
       - [Windows - `git-bash`](#windows---git-bash)
+      - [Windows `powershell`](#windows-powershell)
     - [Create a GDAL Virtual Dataset (optional)](#create-a-gdal-virtual-dataset-optional)
     - [Create Cesium Terrain files](#create-cesium-terrain-files)
     - [Create Cesium layer description file](#create-cesium-layer-description-file)
@@ -103,7 +104,7 @@ Follow the examples below for different operating systems and shells.
 
 ```bash
 docker run -it --name ctb \
-    -v "/docker/terrain":"/data" \
+    -v "/docker/terrain:/data" \
   tumgis/ctb-quantized-mesh
 ```
 
@@ -111,7 +112,7 @@ docker run -it --name ctb \
 
 ```sh
 docker run -it --name ctb ^
-    -v "d:/docker/terrain":"/data" ^
+    -v "d:/docker/terrain:/data" ^
   tumgis/ctb-quantized-mesh
 ```
 
@@ -119,7 +120,15 @@ docker run -it --name ctb ^
 
 ```sh
 winpty docker run --rm -it --name ctb \
-    -v "d:\\docker\\terrain":"/data" \
+    -v "d:\\docker\\terrain:/data" \
+  tumgis/ctb-quantized-mesh
+```
+
+#### Windows `powershell`
+
+```powershell
+docker run -it --name ctb `
+    -v "d:\docker\terrain:/data" `
   tumgis/ctb-quantized-mesh
 ```
 
