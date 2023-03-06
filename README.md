@@ -23,7 +23,14 @@ Follow the steps below to create your own quantized-mesh tiles for Cesium using 
 
 ## News
 
+* 2023-03-06:
+
+  * Updated both images to reflect latest changes in
+ [ahuarte47/cesium-terrain-builder:master-quantized-mesh](https://github.com/ahuarte47/cesium-terrain-builder/tree/master-quantized-mesh)
+  * Updated GDAL to 2.4.0 in `latest` image
+
 * 2020-11: Updated ``alpine`` image to Alpine v3.12 and GDAL v3.14
+
 * 2020-11: Reduced size of all images using multi stage builds.
 
 ## Image variants
@@ -33,7 +40,7 @@ To get the image run: `docker pull tumgis/ctb-quantized-mesh:<TAG>` Following ta
 
 | Tag        | Build status                                                                                                                                                  | Description                                                          |
 |------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------:|----------------------------------------------------------------------|
-| ``latest`` | [![Build Status](https://travis-ci.com/tum-gis/cesium-terrain-builder-docker.svg?branch=master)](https://travis-ci.com/tum-gis/cesium-terrain-builder-docker) | Latest image build based on Debian and GDAL 2.1.2                    |
+| ``latest`` | [![Build Status](https://travis-ci.com/tum-gis/cesium-terrain-builder-docker.svg?branch=master)](https://travis-ci.com/tum-gis/cesium-terrain-builder-docker) | Latest image build based on Debian and GDAL 2.4.0                  |
 | ``alpine`` | [![Build Status](https://travis-ci.com/tum-gis/cesium-terrain-builder-docker.svg?branch=alpine)](https://travis-ci.com/tum-gis/cesium-terrain-builder-docker) | Image based on leightweight Alpine Linux v3.12 and GDAL v3.14        |
 
 ## Content
@@ -63,7 +70,7 @@ To get the image run: `docker pull tumgis/ctb-quantized-mesh:<TAG>` Following ta
 
 ### Docker settings
 
-The system ressources Docker can use are limited by default on Windows systems.
+The system resources Docker can use are limited by default on Windows systems.
 Goto *Docker tray Icon* -> *Settings* -> *Advanced* to adjust the *number of cores*
 and *main memory* Docker can use to increase performance.
 
