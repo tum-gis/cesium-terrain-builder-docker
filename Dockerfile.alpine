@@ -1,5 +1,5 @@
 # Fetch stage #################################################################
-FROM alpine:3.12 AS fetchstage
+FROM alpine:3.17 AS fetchstage
 
 # Setup fetch deps
 RUN set -ex && \
@@ -9,9 +9,9 @@ RUN set -ex && \
 # Fetch source code
 RUN set -x && \
   mkdir -p ctbtemp && cd ctbtemp && \
-  git clone https://github.com/ahuarte47/cesium-terrain-builder.git && \
-  cd cesium-terrain-builder && \
-  git checkout master-quantized-mesh
+  git clone -b master-quantized-mesh --depth 1 \
+    https://github.com/ahuarte47/cesium-terrain-builder.git && \
+  cd cesium-terrain-builder
 
 # Cleanup
 RUN  set -x && \
