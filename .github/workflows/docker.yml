@@ -1,0 +1,69 @@
+name: docker-build-edge
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        variant: ['', 'alpine']
+
+    steps:
+    -
+      name: Checkout repo
+      uses: actions/checkout@v3
+    -
+      name: Log in to the Github Container Registry
+      uses: docker/login-action@v2
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+        with:
+          platforms: linux/amd64,linux/arm64
+    -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+    -
+      name: Extract metadata (tags, labels) for docker image
+      id: meta
+      uses: docker/metadata-action@v4
+      with:
+        images: |
+          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+        tags: |
+          type=edge,branch=master
+        labels: |
+          maintainer=Chair of Geoinformatics, Technical University of Munich (TUM)
+          org.opencontainers.image.vendor=Chair of Geoinformatics, Technical University of Munich (TUM)
+          org.opencontainers.image.title=ctb-quantized-mesh
+    -
+      name: Build and publish ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+      uses: docker/build-push-action@v4
+      with:
+        push: false
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+        platforms: linux/amd64,linux/arm64
+    -
+      name: Build and publish ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:alpine
+      uses: docker/build-push-action@v4
+      with:
+        push: false
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+        platforms: linux/amd64,linux/arm64
+        file: Dockerfile.alpine
