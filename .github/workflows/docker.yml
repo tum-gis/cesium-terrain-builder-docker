@@ -14,9 +14,9 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        variant: ['', 'alpine']
+    # strategy:
+    #   matrix:
+    #     variant: ['', 'alpine']
 
     steps:
     -
@@ -38,20 +38,20 @@ jobs:
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
     -
-      name: Extract metadata (tags, labels) for docker image
+      name: Extract metadata (tags, labels) for docker image - Debian
       id: meta
       uses: docker/metadata-action@v4
       with:
         images: |
           ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
         tags: |
-          type=edge,branch=master
+          type=raw,value=latest
         labels: |
           maintainer=Chair of Geoinformatics, Technical University of Munich (TUM)
           org.opencontainers.image.vendor=Chair of Geoinformatics, Technical University of Munich (TUM)
           org.opencontainers.image.title=ctb-quantized-mesh
     -
-      name: Build and publish ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+      name: Build and publish ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} - Debian
       uses: docker/build-push-action@v4
       with:
         push: false
@@ -59,11 +59,24 @@ jobs:
         labels: ${{ steps.meta.outputs.labels }}
         platforms: linux/amd64,linux/arm64
     -
-      name: Build and publish ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:alpine
+      name: Extract metadata (tags, labels) for docker image - Alpine
+      id: meta-alpine
+      uses: docker/metadata-action@v4
+      with:
+        images: |
+          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+        tags: |
+          type=raw,value=alpine
+        labels: |
+          maintainer=Chair of Geoinformatics, Technical University of Munich (TUM)
+          org.opencontainers.image.vendor=Chair of Geoinformatics, Technical University of Munich (TUM)
+          org.opencontainers.image.title=ctb-quantized-mesh
+    -
+      name: Build and publish ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} - Alpine
       uses: docker/build-push-action@v4
       with:
         push: false
-        tags: ${{ steps.meta.outputs.tags }}
-        labels: ${{ steps.meta.outputs.labels }}
+        tags: ${{ steps.meta-alpine.outputs.tags }}
+        labels: ${{ steps.meta-alpine.outputs.labels }}
         platforms: linux/amd64,linux/arm64
         file: Dockerfile.alpine
