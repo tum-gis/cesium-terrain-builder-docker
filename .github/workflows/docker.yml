@@ -55,7 +55,7 @@ jobs:
         labels: ${{ steps.meta.outputs.labels }}
         platforms: linux/amd64,linux/arm64
 
-  build-aline:
+  build-alpine:
 
     runs-on: ubuntu-latest
 
