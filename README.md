@@ -23,6 +23,14 @@ Follow the steps below to create your own quantized-mesh tiles for Cesium using 
 
 ## News
 
+* 2023-07-31:
+  * An additional `arm64` version of the image was added. This currently untested and I'm happy for
+    any feedback on this, see #19. The `arm64` Docker images are hosted in
+    [Github packages](https://github.com/tum-gis/cesium-terrain-builder-docker/pkgs/container/ctb-quantized-mesh).
+
+    `docker pull ghcr.io/tum-gis/ctb-quantized-mesh:latest`,
+    `docker pull ghcr.io/tum-gis/ctb-quantized-mesh:alpine`
+
 * 2023-03-06:
 
   * Updated both images to reflect latest changes in
@@ -35,13 +43,25 @@ Follow the steps below to create your own quantized-mesh tiles for Cesium using 
 
 ## Image variants
 
-The Docker images are available on DockerHub from [tumgis](https://hub.docker.com/r/tumgis/).
-To get the image run: `docker pull tumgis/ctb-quantized-mesh:<TAG>` Following tags are available:
+The `amd64` Docker images are available on DockerHub from [tumgis](https://hub.docker.com/r/tumgis/) or from
+[Github packages](https://github.com/tum-gis/cesium-terrain-builder-docker/pkgs/container/ctb-quantized-mesh).
+To get the image run:
 
-| Tag        | Build status                                                                                                                                                  | Description                                                          |
-|------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------:|----------------------------------------------------------------------|
-| ``latest`` | [![Build Status](https://travis-ci.com/tum-gis/cesium-terrain-builder-docker.svg?branch=master)](https://travis-ci.com/tum-gis/cesium-terrain-builder-docker) | Latest image build based on Debian and GDAL 2.4.0                  |
-| ``alpine`` | [![Build Status](https://travis-ci.com/tum-gis/cesium-terrain-builder-docker.svg?branch=alpine)](https://travis-ci.com/tum-gis/cesium-terrain-builder-docker) | Image based on leightweight Alpine Linux v3.12 and GDAL v3.14        |
+`docker pull tumgis/ctb-quantized-mesh:<TAG>` or
+`docker pull ghcr.io/tum-gis/ctb-quantized-mesh:<TAG>`
+
+The `arm64` Docker images are ONLY available from
+[Github packages](https://github.com/tum-gis/cesium-terrain-builder-docker/pkgs/container/ctb-quantized-mesh).
+To get the image run:
+
+`docker pull ghcr.io/tum-gis/ctb-quantized-mesh:<TAG>`
+
+Following tags are available:
+
+| Tag        |                                                                                                                                                       Build status                                                                                                                                                       | Arch            | Description                                                   |
+|------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|-----------------|---------------------------------------------------------------|
+| ``latest`` |             [![Build Status](https://travis-ci.com/tum-gis/cesium-terrain-builder-docker.svg?branch=master)](https://travis-ci.com/tum-gis/cesium-terrain-builder-docker) ![Build status](https://img.shields.io/github/actions/workflow/status/tum-gis/cesium-terrain-builder-docker/docker.yml?logo=docker)            | `amd64` `arm64` | Latest image build based on Debian and GDAL 2.4.0             |
+| ``alpine`` | [![Build Status](https://travis-ci.com/tum-gis/cesium-terrain-builder-docker.svg?branch=alpine)](https://travis-ci.com/tum-gis/cesium-terrain-builder-docker) ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/tum-gis/cesium-terrain-builder-docker/docker.yml?logo=docker) | `amd64` `arm64` | Image based on leightweight Alpine Linux v3.12 and GDAL v3.14 |
 
 ## Content
 
