@@ -23,12 +23,22 @@ Follow the steps below to create your own quantized-mesh tiles for Cesium using 
 
 ## News
 
+* 2023-08-06:
+  * The additional `arm64` image ins now available from both
+    [Dockerhub](https://hub.docker.com/r/tumgis/ctb-quantized-mesh) and
+    [Github packages](https://github.com/tum-gis/cesium-terrain-builder-docker/pkgs/container/ctb-quantized-mesh).
+
+    `docker pull ghcr.io/tum-gis/ctb-quantized-mesh:latest`
+
+    `docker pull ghcr.io/tum-gis/ctb-quantized-mesh:alpine`
+
 * 2023-07-31:
   * An additional `arm64` version of the image was added. This currently untested and I'm happy for
     any feedback on this, see tum-gis/cesium-terrain-builder-docker#19. The `arm64` Docker images are hosted in
     [Github packages](https://github.com/tum-gis/cesium-terrain-builder-docker/pkgs/container/ctb-quantized-mesh).
 
-    `docker pull ghcr.io/tum-gis/ctb-quantized-mesh:latest`,
+    `docker pull ghcr.io/tum-gis/ctb-quantized-mesh:latest`
+
     `docker pull ghcr.io/tum-gis/ctb-quantized-mesh:alpine`
 
 * 2023-03-06:
