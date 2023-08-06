@@ -1,6 +1,7 @@
 name: docker-build-edge
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
