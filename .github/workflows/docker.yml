@@ -3,7 +3,7 @@ name: docker-build-edge
 on:
   push:
     branches:
-      - master
+      - main
 
 env:
   REGISTRY: ghcr.io
