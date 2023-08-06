@@ -10,10 +10,10 @@ Information on the most recent development of this fork is available in this
 Thanks to [@homme](https://github.com/homme) and [@ahuarte47](https://github.com/ahuarte47)
 for the great work on Cesium Terrain Builder and quantized-mesh support.
 
-> **Note:** The images are rebuild on every push to
+> **Note:** The images are manually rebuild, when new commits are published at
 > [ahuarte47/cesium-terrain-builder/tree/master-quantized-mesh](https://github.com/ahuarte47/cesium-terrain-builder/tree/master-quantized-mesh).
-> Goto [hub.docker.com/r/tumgis/ctb-quantized-mesh](https://hub.docker.com/r/tumgis/ctb-quantized-mesh)
-> to check for the latest build.
+> If you miss an update in an image, please let us know by creating an
+> [issue](https://github.com/tum-gis/cesium-terrain-builder-docker/issues).
 
 If you experience problems or want to contribute please create an
 [issue](https://github.com/tum-gis/cesium-terrain-builder-docker/issues)
